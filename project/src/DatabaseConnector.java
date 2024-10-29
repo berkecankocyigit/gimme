@@ -1,7 +1,7 @@
 public class DatabaseConnector {
     private static final DatabaseConnector ourInstance = new DatabaseConnector();
 
-    public DatabaseConnector() {
+    private DatabaseConnector() {
         System.out.println("DatabaseConnector is initialized");
     }
 
