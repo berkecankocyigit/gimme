@@ -3,4 +3,7 @@ public class Technician extends User {
         super(id, name, email, password);
     }
 
+    public void assignComputer(Student student, Computer computer) {
+        student.setAssignedComputers(computer);
+    }
 }
