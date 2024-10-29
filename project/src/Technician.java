@@ -4,6 +4,10 @@ public class Technician extends User {
     }
 
     public void assignComputer(Student student, Computer computer) {
-        student.setAssignedComputers(computer);
+        student.addAssignedComputers(computer);
+    }
+
+    public void removeAssignedComputer(Student student, Computer computer) {
+        student.removeAssignedComputer(computer);
     }
 }

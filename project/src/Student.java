@@ -12,12 +12,18 @@ public class Student extends User {
         System.out.println("Sending job request");
     }
     public void getAssignedComputers() {
+        System.out.println("Getting assigned computers of " + this.getName());
         for (Computer computer : assignedComputers) {
             computer.getSpecifications();
             System.out.println("-------------");
         }
     }
-    public void setAssignedComputers(Computer assignedComputers) {
+    public void addAssignedComputers(Computer assignedComputers) {
         this.assignedComputers.add(assignedComputers);
     }
+
+    public void removeAssignedComputer(Computer assignedComputer) {
+        this.assignedComputers.remove(assignedComputer);
+    }
+
 }
