@@ -1,5 +1,7 @@
 public class Main {
     public static void main(String[] args) {
+        DatabaseConnector databaseConnector = DatabaseConnector.getInstance();
+        databaseConnector.connect();
         Admin admin = new Admin("1", "adimn", "admin.admin@ozu.edu.tr", "admin123");
 
         Student student1 = new Student("2", "student1", "student1@ozu.edu.tr", "student123");
