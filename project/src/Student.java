@@ -1,11 +1,10 @@
-import java.util.List;
-import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Student extends User {
-    private List<Computer> assignedComputers;
+    private Set<Computer> assignedComputers = new HashSet<>();
     public Student(String id, String name, String email, String password) {
         super(id, name, email, password);
-        this.assignedComputers = new ArrayList<>();
     }
 
     public void sendJobRequest() {
@@ -20,10 +19,12 @@ public class Student extends User {
     }
     public void addAssignedComputers(Computer assignedComputers) {
         this.assignedComputers.add(assignedComputers);
+        assignedComputers.addAssignedStudent(this);
     }
 
     public void removeAssignedComputer(Computer assignedComputer) {
         this.assignedComputers.remove(assignedComputer);
+        assignedComputer.removeAssignedStudent(this);
     }
 
 }
