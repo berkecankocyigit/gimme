@@ -1,24 +1,39 @@
+import java.sql.Connection;
+
 public class Main {
     public static void main(String[] args) {
-        DatabaseConnector databaseConnector = DatabaseConnector.getInstance();
-        databaseConnector.connect();
-        Admin admin = new Admin("1", "adimn", "admin.admin@ozu.edu.tr", "admin123");
+        DatabaseManager databaseConnector = DatabaseManager.getInstance();
+        Connection con = databaseConnector.connect();
 
-        Student student1 = new Student("2", "student1", "student1@ozu.edu.tr", "student123");
-        Student student2 = new Student("3", "student2", "student2@ozu.edu.tr", "student123");
-        Technician technician = new Technician("4", "technician1", "technician@ozu.edu.tr", "technician123");
-        Computer windowsComputer_1 = ComputerFactory.createComputer("Windows", "Dell XPS", "16GB", "512GB SSD");
-        Computer windowsComputer_2 = ComputerFactory.createComputer("Mac", "Mac Air", "8GB", "256GB SSD");
-        technician.assignComputer(student1, windowsComputer_1);
-        technician.assignComputer(student1, windowsComputer_2);
-        student1.getAssignedComputers();
-        System.out.println("Remove Windows : ");
-        technician.removeAssignedComputer(student1, windowsComputer_1);
-        student1.getAssignedComputers();
+        Student student1 = new Student(1, "student1", "student1@ozu.edu.tr", "s1_password");
+        Student student2 = new Student(2, "student2", "student2@ozu.edu.tr", "s2_password");
 
-        technician.assignComputer(student2, windowsComputer_2);
-        student2.getAssignedComputers();
-        windowsComputer_1.getAssignedStudents();
-        student1.sendJobRequest();
+        Computer windowsComputer = ComputerFactory.createComputer(1, "Windows", "Dell XPS", "16GB", "512GB SSD");
+        Computer macComputer = ComputerFactory.createComputer(2,"Mac", "Mac Air", "8GB", "256GB SSD");
+
+        Technician technician = new Technician(3, "technician1", "technician1@ozu.edu.tr", "t1_password");
+
+        technician.addUser(con, student1);
+        technician.addUser(con, student2);
+
+        technician.addComputer(con, windowsComputer);
+        technician.addComputer(con, macComputer);
+
+
+        technician.assignComputer(con, student1, windowsComputer);
+        technician.assignComputer(con, student1, macComputer);
+
+        student1.showUserComputers(con);
+        student2.showUserComputers(con);
+
+        System.out.println("***************************************");
+        technician.removeUser(con, student1);
+        technician.removeUser(con, student2);
+        technician.removeComputer(con, windowsComputer);
+        technician.removeComputer(con, macComputer);
+        technician.removeAssignedComputer(con, student1, windowsComputer);
+        technician.removeAssignedComputer(con, student1, macComputer);
+
+
     }
 }
