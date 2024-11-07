@@ -1,9 +1,9 @@
 public class ComputerFactory {
-    public static Computer createComputer(String type, String model, String ram, String storage) {
+    public static Computer createComputer(int id, String type, String model, String ram, String storage) {
         if ("Windows".equalsIgnoreCase(type)) {
-            return new WindowsComputer(model, ram, storage);
+            return new WindowsComputer(id, model, ram, storage);
         } else if ("Mac".equalsIgnoreCase(type)) {
-            return new MacComputer(model, ram, storage);
+            return new MacComputer(id, model, ram, storage);
         }
         return null;
     }

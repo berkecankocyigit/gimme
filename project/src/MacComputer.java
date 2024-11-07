@@ -1,6 +1,6 @@
 public class MacComputer extends Computer {
-    public MacComputer(String model, String ram, String storage) {
-        super(model, ram, storage);
+    public MacComputer(int id, String model, String ram, String storage) {
+        super(id, model, ram, storage);
     }
 
     @Override

@@ -1,6 +1,6 @@
 public class WindowsComputer extends Computer {
-    public WindowsComputer(String model, String ram, String storage) {
-        super(model, ram, storage);
+    public WindowsComputer(int id, String model, String ram, String storage) {
+        super(id, model, ram, storage);
     }
 
     @Override
