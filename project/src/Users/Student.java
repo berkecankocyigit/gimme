@@ -1,3 +1,6 @@
+package Users;
+import Computers.Computer;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -7,7 +10,7 @@ public class Student extends User {
     private Set<Computer> assignedComputers = new HashSet<>();
     public Student(int id, String name, String email, String password) {
         super(id, name, email, password);
-        this.status = "Student";
+        this.status = "Users.Student";
         System.out.println(name + " student created");
     }
 

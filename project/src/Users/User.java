@@ -1,3 +1,6 @@
+package Users;
+import Computers.Computer;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -47,7 +50,7 @@ public abstract class User {
             ResultSet rs = stmt.executeQuery();
 
             // Sonuçları yazdırıyoruz
-            System.out.println("Computers assigned to User (ID: " + id + "):");
+            System.out.println("Computers assigned to Users.User (ID: " + id + "):");
             while (rs.next()) {
                 int computerId = rs.getInt("id");
                 String model = rs.getString("model");
@@ -55,7 +58,7 @@ public abstract class User {
                 String storage = rs.getString("stırage");
 
                 // Bilgisayar bilgilerini ekrana yazdırıyoruz
-                System.out.println("Computer ID: " + computerId + ", Model: " + model + ", RAM: " + ram + ", Storage: " + storage);
+                System.out.println("Computers.Computer ID: " + computerId + ", Model: " + model + ", RAM: " + ram + ", Storage: " + storage);
             }
 
         } catch (SQLException e) {

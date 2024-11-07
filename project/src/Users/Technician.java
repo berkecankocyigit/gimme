@@ -1,3 +1,6 @@
+package Users;
+import Computers.Computer;
+
 import java.sql.Connection;
 import java.sql.Statement;
 
@@ -6,7 +9,7 @@ public class Technician extends User { ;
 
     public Technician(int id, String name, String email, String password) {
         super(id, name, email, password);
-        this.status="Technician";
+        this.status="Users.Technician";
         System.out.println(name + " technician created");
     }
 
@@ -21,7 +24,7 @@ public class Technician extends User { ;
 
             statement=conn.createStatement();
             statement.executeUpdate(query);
-            System.out.println("User Inserted");
+            System.out.println("Users.User Inserted");
         }catch (Exception e){
             System.out.println(e);
         }
@@ -36,7 +39,7 @@ public class Technician extends User { ;
 
             statement=conn.createStatement();
             statement.executeUpdate(query);
-            System.out.println("Computer Inserted");
+            System.out.println("Computers.Computer Inserted");
         }catch (Exception e){
             System.out.println(e);
         }
@@ -71,7 +74,7 @@ public class Technician extends User { ;
             statement = conn.createStatement();
             statement.executeUpdate(query);
 
-            System.out.println("User with ID " + user.getId() + " removed");
+            System.out.println("Users.User with ID " + user.getId() + " removed");
 
         } catch (Exception e) {
             System.out.println(e);
@@ -89,7 +92,7 @@ public class Technician extends User { ;
             statement = conn.createStatement();
             statement.executeUpdate(query);
 
-            System.out.println("Computer with ID " + computer.getId() + " removed");
+            System.out.println("Computers.Computer with ID " + computer.getId() + " removed");
 
         } catch (Exception e) {
             System.out.println(e);
@@ -107,7 +110,7 @@ public class Technician extends User { ;
             statement = conn.createStatement();
             statement.executeUpdate(query);
 
-            System.out.println("Relation between User ID " + user.getId() + " and Computer ID " + computer.getId() + " removed");
+            System.out.println("Relation between Users.User ID " + user.getId() + " and Computers.Computer ID " + computer.getId() + " removed");
 
         } catch (Exception e) {
             System.out.println(e);
