@@ -1,17 +1,16 @@
 package Users;
-import Computers.Computer;
 
-public class Admin extends User {
+public class Admin extends ManagerAbstract {
     String status;
     public Admin(int id, String name, String email, String password) {
         super(id, name, email, password);
-        this.status = "Users.Admin";
+        this.status = "Admin";
         System.out.println(name+" admin created");
     }
 
-    public String getStatus() { return status; }
-
-    public void manageUsers() {
-        System.out.println("Users.Admin manages users");
+    @Override
+    public String getStatus() {
+        return status;
     }
+
 }
