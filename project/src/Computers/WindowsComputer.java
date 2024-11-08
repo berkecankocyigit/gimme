@@ -7,8 +7,6 @@ public class WindowsComputer extends Computer {
 
     @Override
     public void getSpecifications() {
-        System.out.println("Windows Computers.Computer Model: " + model);
-        System.out.println("RAM: " + ram);
-        System.out.println("Storage: " + storage);
+        System.out.println("Windows Computer Model: " + model + " | RAM: " + ram + " | Storage: " + storage);
     }
 }

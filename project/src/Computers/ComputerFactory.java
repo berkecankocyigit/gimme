@@ -1,12 +1,20 @@
 package Computers;
 
-public class ComputerFactory {
-    public static Computer createComputer(int id, String type, String model, String ram, String storage) {
-        if ("Windows".equalsIgnoreCase(type)) {
-            return new WindowsComputer(id, model, ram, storage);
-        } else if ("Mac".equalsIgnoreCase(type)) {
-            return new MacComputer(id, model, ram, storage);
+public class ComputerFactory implements IComputerFactory {
+
+    public ComputerFactory() {
+        System.out.println("ComputerFactory is created!");
+    }
+
+    @Override
+    public Computer createComputer(ComputerType computerType, int id, String model, String ram, String storage) {
+        switch (computerType) {
+            case WindowsComputer:
+                return new WindowsComputer(id, model, ram, storage);
+            case MacComputer:
+                return new MacComputer(id, model, ram, storage);
+            default:
+                return null;
         }
-        return null;
     }
 }
