@@ -1,5 +1,6 @@
 package Computers;
 import Users.Student;
+import Job.Job;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -10,7 +11,8 @@ public abstract class Computer {
     protected String ram;
     protected String storage;
     protected Boolean state = true;
-    private Set<Student> assignedStudent = new HashSet<>();
+    private Set<Student> assignedStudents = new HashSet<>();
+    private Set<Job> assignedJobs = new HashSet<>();
 
     public Computer(int id, String model, String ram, String storage) {
         this.id = id;
@@ -27,17 +29,34 @@ public abstract class Computer {
 
     public void getAssignedStudents() {
         System.out.println("Getting assigned computers of " + this.model);
-        for (Student student : assignedStudent) {
+        for (Student student : assignedStudents) {
             System.out.println(student.getName());
             System.out.println("-------------");
         }
     }
     public void addAssignedStudent(Student assignedStudent) {
-        this.assignedStudent.add(assignedStudent);
+        this.assignedStudents.add(assignedStudent);
     }
 
     public void removeAssignedStudent(Student assignedStudent) {
-        this.assignedStudent.remove(assignedStudent);
+        this.assignedStudents.remove(assignedStudent);
+    }
+
+    public void addAssignedJob(Job assignedJob) {
+        this.assignedJobs.add(assignedJob);
+    }
+
+    public void removeAssignedJob(Job assignedJob) {
+        this.assignedJobs.remove(assignedJob);
+    }
+
+    public Set<Job> getAssignedJob() {
+        return (Set<Job>) this.assignedJobs;
+    }
+    public void printAssignedJob() {
+        for (Job job : assignedJobs) {
+            System.out.println("Job Id: " + job.getId() + " Command : " + job.getCommand());
+        }
     }
 
     public Boolean hasJob() {

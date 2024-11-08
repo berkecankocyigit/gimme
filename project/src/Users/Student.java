@@ -1,5 +1,6 @@
 package Users;
 import Computers.Computer;
+import Job.Job;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -30,6 +31,16 @@ public class Student extends User {
         }
     }
 
+    public void printAssignedJob() {
+        for (Computer computer : assignedComputers) {
+            System.out.print("The jobs in ");
+            computer.getSpecifications();
+            for (Job job : computer.getAssignedJob()){
+                System.out.println("Job Id: " + job.getId() + " Command : " + job.getCommand());
+            }
+        }
+    }
+
     public void addAssignedComputer(Computer computer) {
         assignedComputers.add(computer);
     }
@@ -37,6 +48,25 @@ public class Student extends User {
     public void removeAssignedComputer(Computer computer) {
         assignedComputers.remove(computer);
     }
+
+    public void addAssignedJob(Job job, Computer computer) {
+        if (assignedComputers.contains(computer)) {
+            System.out.println("The job is assined succesfully !!!");
+            computer.addAssignedJob(job);
+        } else {
+            System.out.println("The computer is not assined");
+        }
+    }
+
+    public void removeAssignedJob(Job job, Computer computer) {
+        if (assignedComputers.contains(computer)) {
+            System.out.println("The job is remove succesfully !!!");
+            computer.removeAssignedJob(job);
+        } else {
+            System.out.println("The computer is not assined");
+        }
+    }
+
 
 
 }
