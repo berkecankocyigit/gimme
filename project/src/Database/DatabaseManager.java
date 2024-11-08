@@ -1,3 +1,5 @@
+package Database;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -11,7 +13,7 @@ public class DatabaseManager {
 
     private DatabaseManager() {
 
-        System.out.println("DatabaseManager is initialized");
+        System.out.println("Database.DatabaseManager is initialized");
     }
 
     public static DatabaseManager getInstance() {
