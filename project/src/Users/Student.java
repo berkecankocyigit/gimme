@@ -5,35 +5,38 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Student extends User {
-    String status;
+    private String status;
+    private Set<Computer> assignedComputers;
 
-    private Set<Computer> assignedComputers = new HashSet<>();
     public Student(int id, String name, String email, String password) {
         super(id, name, email, password);
-        this.status = "Users.Student";
+        this.status = "Student";
+        this.assignedComputers = new HashSet<>();
         System.out.println(name + " student created");
     }
 
-    public String getStatus() { return status; }
-    public void sendJobRequest() {
-        System.out.println("Sending job request: " + this.getName());
+    @Override
+    public String getStatus() {
+        return status;
     }
 
-    public void getAssignedComputers() {
-        System.out.println("Getting assigned computers of " + this.getName());
+    public Set<Computer> getAssignedComputers() {
+        return assignedComputers;
+    }
+
+    public void printAssignedComputers() {
         for (Computer computer : assignedComputers) {
             computer.getSpecifications();
-            System.out.println("-------------");
         }
     }
-    public void addAssignedComputers(Computer assignedComputers) {
-        this.assignedComputers.add(assignedComputers);
-        assignedComputers.addAssignedStudent(this);
+
+    public void addAssignedComputer(Computer computer) {
+        assignedComputers.add(computer);
     }
 
-    public void removeAssignedComputer(Computer assignedComputer) {
-        this.assignedComputers.remove(assignedComputer);
-        assignedComputer.removeAssignedStudent(this);
+    public void removeAssignedComputer(Computer computer) {
+        assignedComputers.remove(computer);
     }
+
 
 }
