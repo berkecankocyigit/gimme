@@ -10,8 +10,7 @@ import java.sql.Connection;
 
 public class Main {
     public static void main(String[] args) {
-        DatabaseManager databaseConnector = DatabaseManager.getInstance();
-        Connection con = databaseConnector.connect();
+
         ComputerFactory computerFactory = new ComputerFactory();
 
         Student student1 = new Student(1, "student1", "student1@ozu.edu.tr", "s1_password");
@@ -24,16 +23,16 @@ public class Main {
 
         System.out.println("----------------------------------");
 
-        technician.addUser(con, student1);
-        technician.addUser(con, student2);
+        technician.addUser(student1);
+        technician.addUser(student2);
         System.out.println("----------------------------------");
 
-        technician.addComputer(con, windowsComputer);
-        technician.addComputer(con, macComputer);
+        technician.addComputer(windowsComputer);
+        technician.addComputer(macComputer);
         System.out.println("----------------------------------");
 
-        technician.assignComputer(con, student1, windowsComputer);
-        technician.assignComputer(con, student1, macComputer);
+        technician.assignComputer(student1, windowsComputer);
+        technician.assignComputer(student1, macComputer);
         System.out.println("----------------------------------");
 
         System.out.println("Student 1");
@@ -54,12 +53,12 @@ public class Main {
         student2.printAssignedJob();
 
         System.out.println("***************************************");
-        technician.removeUser(con, student1);
-        technician.removeUser(con, student2);
-        technician.removeComputer(con, windowsComputer);
-        technician.removeComputer(con, macComputer);
-        technician.removeAssignedComputer(con, student1, windowsComputer);
-        technician.removeAssignedComputer(con, student1, macComputer);
+        technician.removeUser(student1);
+        technician.removeUser(student2);
+        technician.removeComputer(windowsComputer);
+        technician.removeComputer(macComputer);
+        technician.removeAssignedComputer(student1, windowsComputer);
+        technician.removeAssignedComputer(student1, macComputer);
 
 
     }

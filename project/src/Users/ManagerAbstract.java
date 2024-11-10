@@ -1,15 +1,19 @@
 package Users;
 import Computers.Computer;
+import Database.DatabaseManager;
 
 import java.sql.Connection;
 import java.sql.Statement;
 
 public abstract class ManagerAbstract extends User {
+    DatabaseManager databaseConnector = DatabaseManager.getInstance();
+    Connection conn = databaseConnector.connect();
+
     public ManagerAbstract(int id, String name, String email, String password) {
         super(id, name, email, password);
     }
 
-    public void addUser(Connection conn, User user){
+    public void addUser( User user){
         Statement statement;
         try {
             String query=String.format("INSERT INTO users(id, name, email, password, status) VALUES ('%s','%s','%s','%s','%s');",
@@ -24,10 +28,10 @@ public abstract class ManagerAbstract extends User {
         }
     }
 
-    public void addComputer(Connection conn, Computer computer){
+    public void addComputer( Computer computer){
         Statement statement;
         try {
-            String query=String.format("INSERT INTO computers(id, model, ram, stırage) VALUES ('%s','%s','%s','%s');",
+            String query=String.format("INSERT INTO computers(id, model, ram, storage) VALUES ('%s','%s','%s','%s');",
                     computer.getId(), computer.getModel(), computer.getRam(), computer.getStorage()
             );
 
@@ -39,7 +43,7 @@ public abstract class ManagerAbstract extends User {
         }
     }
 
-    public void assignComputer(Connection conn, Student student, Computer computer) {
+    public void assignComputer( Student student, Computer computer) {
         Statement statement;
         try {
             String query = String.format(
@@ -60,7 +64,7 @@ public abstract class ManagerAbstract extends User {
         }
     }
 
-    public void removeUser(Connection conn, User user) {
+    public void removeUser( User user) {
         Statement statement;
         try {
             String query = String.format(
@@ -78,7 +82,7 @@ public abstract class ManagerAbstract extends User {
         }
     }
 
-    public void removeComputer(Connection conn, Computer computer) {
+    public void removeComputer( Computer computer) {
         Statement statement;
         try {
             String query = String.format(
@@ -96,7 +100,7 @@ public abstract class ManagerAbstract extends User {
         }
     }
 
-    public void removeAssignedComputer(Connection conn, Student student, Computer computer) {
+    public void removeAssignedComputer( Student student, Computer computer) {
         Statement statement;
         try {
             String query = String.format(
