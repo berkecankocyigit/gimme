@@ -9,7 +9,7 @@ public class DatabaseManager {
     private static final String DB_USER = "postgres";  // PostgreSQL kullanıcısı
     private static final String DB_PASSWORD = "password";  // PostgreSQL şifresi
 
-    private static final DatabaseManager ourInstance = new DatabaseManager();
+    private static DatabaseManager ourInstance;
 
     private DatabaseManager() {
 
@@ -17,6 +17,13 @@ public class DatabaseManager {
     }
 
     public static DatabaseManager getInstance() {
+        if (ourInstance == null) {
+            synchronized (DatabaseManager.class) {
+                if (ourInstance == null) {
+                    ourInstance = new DatabaseManager();
+                }
+            }
+        }
         return ourInstance;
     }
 
