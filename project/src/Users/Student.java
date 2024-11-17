@@ -1,8 +1,10 @@
 package Users;
 import Computers.Computer;
+import Computers.ComputerIterator;
 import Job.Job;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 public class Student extends User {
@@ -21,14 +23,8 @@ public class Student extends User {
         return status;
     }
 
-    public Set<Computer> getAssignedComputers() {
-        return assignedComputers;
-    }
-
-    public void printAssignedComputers() {
-        for (Computer computer : assignedComputers) {
-            computer.getSpecifications();
-        }
+    public Iterator getAssignedComputers() {
+        return new ComputerIterator(assignedComputers);
     }
 
     public void printAssignedJob() {

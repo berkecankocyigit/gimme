@@ -1,9 +1,15 @@
 package Users;
 import Computers.Computer;
+import Computers.ComputerIterator;
+import Computers.ComputerType;
+import Computers.WindowsComputerFactory;
 import Database.DatabaseManager;
 
 import java.sql.Connection;
 import java.sql.Statement;
+
+import java.sql.ResultSet;
+import java.util.*;
 
 public abstract class ManagerAbstract extends User {
     DatabaseManager databaseConnector = DatabaseManager.getInstance();
@@ -119,5 +125,40 @@ public abstract class ManagerAbstract extends User {
         } catch (Exception e) {
             System.out.println(e);
         }
+    }
+
+    public Iterator getComputers() {
+        Set<Computer> computers = new HashSet<>();
+        Statement statement;
+        ResultSet resultSet;
+
+        WindowsComputerFactory windowsComputerFactory = new WindowsComputerFactory();
+
+        try {
+            String query = "SELECT id, model, ram, storage FROM computers";
+            statement = conn.createStatement();
+
+            resultSet = statement.executeQuery(query);
+
+            while (resultSet.next()) {
+                int id = Integer.parseInt(resultSet.getString("id"));
+                String model = resultSet.getString("model");
+                String ram = resultSet.getString("ram");
+                String storage = resultSet.getString("storage");
+
+                // Computer nesnesini oluştur ve listeye ekle
+                Computer computer = windowsComputerFactory.createComputer(id, model, ram, storage);
+                computers.add(computer);
+            }
+
+            // Kaynakları serbest bırak
+            resultSet.close();
+            statement.close();
+        } catch (Exception e) {
+            System.out.println("Error retrieving computers: " + e);
+        }
+
+        // Bilgisayar listesini döndür
+        return new ComputerIterator(computers);
     }
 }

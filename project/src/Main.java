@@ -1,65 +1,92 @@
 import Computers.Computer;
-import Computers.ComputerFactory;
-import Computers.ComputerType;
-import Database.DatabaseManager;
+import Computers.WindowsComputerFactory;
 import Job.Job;
 import Users.Student;
 import Users.Technician;
 
-import java.sql.Connection;
-
 public class Main {
     public static void main(String[] args) {
 
-        ComputerFactory computerFactory = new ComputerFactory();
+        WindowsComputerFactory windowsComputerFactory = new WindowsComputerFactory();
 
+        // Öğrencileri oluştur
         Student student1 = new Student(1, "student1", "student1@ozu.edu.tr", "s1_password");
         Student student2 = new Student(2, "student2", "student2@ozu.edu.tr", "s2_password");
 
-        Computer windowsComputer = computerFactory.createComputer(ComputerType.WindowsComputer, 1, "Dell XPS", "16GB", "512GB SSD");
-        Computer macComputer = computerFactory.createComputer(ComputerType.MacComputer, 2, "Mac Air", "8GB", "256GB SSD");
+        // 5 Windows bilgisayar oluştur
+        Computer windowsComputer1 = windowsComputerFactory.createComputer(1, "Dell XPS", "16GB", "512GB SSD");
+        Computer windowsComputer2 = windowsComputerFactory.createComputer(2, "HP Pavilion", "8GB", "256GB SSD");
+        Computer windowsComputer3 = windowsComputerFactory.createComputer(3, "Lenovo ThinkPad", "16GB", "1TB HDD");
+        Computer windowsComputer4 = windowsComputerFactory.createComputer(4, "Acer Aspire", "8GB", "128GB SSD");
+        Computer windowsComputer5 = windowsComputerFactory.createComputer(5, "Asus VivoBook", "32GB", "1TB SSD");
 
+        // Teknik görevlileri oluştur
         Technician technician = new Technician(3, "technician1", "technician1@ozu.edu.tr", "t1_password");
 
         System.out.println("----------------------------------");
 
+        // Öğrencileri teknik görevlilere ekle
         technician.addUser(student1);
         technician.addUser(student2);
         System.out.println("----------------------------------");
 
-        technician.addComputer(windowsComputer);
-        technician.addComputer(macComputer);
+        // Bilgisayarları teknik görevlilere ekle
+        technician.addComputer(windowsComputer1);
+        technician.addComputer(windowsComputer2);
+        technician.addComputer(windowsComputer3);
+        technician.addComputer(windowsComputer4);
+        technician.addComputer(windowsComputer5);
         System.out.println("----------------------------------");
 
-        technician.assignComputer(student1, windowsComputer);
-        technician.assignComputer(student1, macComputer);
+        // Bilgisayarları öğrencilere ata
+        technician.assignComputer(student1, windowsComputer1);
+        technician.assignComputer(student1, windowsComputer2);
+        technician.assignComputer(student2, windowsComputer3);
         System.out.println("----------------------------------");
 
+        // Atanan bilgisayarları yazdır
         System.out.println("Student 1");
-        student1.printAssignedComputers();
+        student1.printComputers(student1.getAssignedComputers());
         System.out.println("Student 2");
-        student2.printAssignedComputers();
+        student2.printComputers(student2.getAssignedComputers());
 
         System.out.println("----------------------------------");
+
+        // İşler oluştur
         Job job1 = new Job(1, "java main.java");
         Job job2 = new Job(2, "java deneme.java");
+        Job job3 = new Job(3, "java example.java");
+
+        // İşleri öğrencilere ata
         System.out.println("Student 1");
-        student1.addAssignedJob(job1, windowsComputer);
+        student1.addAssignedJob(job1, windowsComputer1);
+        student1.addAssignedJob(job2, windowsComputer2);
         System.out.println("Student 2");
-        student2.addAssignedJob(job2, macComputer);
+        student2.addAssignedJob(job3, windowsComputer3);
 
         System.out.println("----------------------------------");
+
+        // Öğrencilerin işlerini yazdır
         student1.printAssignedJob();
         student2.printAssignedJob();
 
+        System.out.println("----------------------------------");
+        System.out.println("All Computers :");
+        technician.printComputers(technician.getComputers());
+
         System.out.println("***************************************");
+
+        // Öğrencileri ve bilgisayarları kaldır
         technician.removeUser(student1);
         technician.removeUser(student2);
-        technician.removeComputer(windowsComputer);
-        technician.removeComputer(macComputer);
-        technician.removeAssignedComputer(student1, windowsComputer);
-        technician.removeAssignedComputer(student1, macComputer);
+        technician.removeComputer(windowsComputer1);
+        technician.removeComputer(windowsComputer2);
+        technician.removeComputer(windowsComputer3);
+        technician.removeComputer(windowsComputer4);
+        technician.removeComputer(windowsComputer5);
 
-
+        technician.removeAssignedComputer(student1, windowsComputer1);
+        technician.removeAssignedComputer(student1, windowsComputer2);
+        technician.removeAssignedComputer(student2, windowsComputer3);
     }
 }

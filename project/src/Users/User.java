@@ -1,9 +1,12 @@
 package Users;
 
+import Computers.Computer;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Iterator;
 
 public abstract class User {
     private int id;
@@ -16,6 +19,13 @@ public abstract class User {
         this.name = name;
         this.email = email;
         this.password = password;
+    }
+
+    public void printComputers(Iterator computers) {
+        while (computers.hasNext()) {
+            Computer computer = (Computer) computers.next();
+            computer.getSpecifications();
+        }
     }
 
     public int getId(){return id;}
