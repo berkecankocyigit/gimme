@@ -13,8 +13,6 @@ import java.sql.ResultSet;
 import java.util.*;
 
 public abstract class ManagerAbstract extends User {
-    DatabaseConnector databaseConnector = DatabaseConnector.getInstance();
-    Connection conn = databaseConnector.connect();
 
     SimpleRemoteControl remoteControl = new SimpleRemoteControl();
 
