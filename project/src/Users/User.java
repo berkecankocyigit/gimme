@@ -1,13 +1,13 @@
 package Users;
 
 import Computers.Computer;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.Iterator;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public abstract class User {
     private int id;
     private String name;
@@ -27,12 +27,6 @@ public abstract class User {
             computer.getSpecifications();
         }
     }
-
-    public int getId(){return id;}
-    public String getName(){return name;}
-    public String getEmail(){return email;}
-    public String getPassword(){return password;}
-
     public abstract String getStatus();
 
 }

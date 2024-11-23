@@ -1,5 +1,10 @@
 package Job;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class Job {
     private int id;
     private String command;
@@ -10,11 +15,5 @@ public class Job {
         this.id = id;
         this.command = command;
         this.status = JobState.Padding;
-    }
-    public int getId() {
-        return id;
-    }
-    public String getCommand() {
-        return command;
     }
 }

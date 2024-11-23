@@ -5,6 +5,11 @@ import Job.Job;
 import java.util.HashSet;
 import java.util.Set;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public abstract class Computer {
     protected int id;
     protected String model;
@@ -22,10 +27,6 @@ public abstract class Computer {
     }
 
     public abstract void getSpecifications();
-    public int getId() {return id;}
-    public String getModel() {return model;}
-    public String getRam() {return ram;}
-    public String getStorage() {return storage;}
 
     public void getAssignedStudents() {
         System.out.println("Getting assigned computers of " + this.model);
