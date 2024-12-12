@@ -45,8 +45,9 @@ public class Student extends User {
         assignedComputers.remove(computer);
     }
 
-    public void addAssignedJob(Job job, Computer computer) {
+    public void addAssignedJob(int id, String command, Computer computer) {
         if (assignedComputers.contains(computer)) {
+            Job job = new Job(id, command, this, computer);
             System.out.println("The job is assined succesfully !!!");
             computer.addAssignedJob(job);
         } else {

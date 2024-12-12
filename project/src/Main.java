@@ -52,17 +52,13 @@ public class Main {
 
         System.out.println("----------------------------------");
 
-        // İşler oluştur
-        Job job1 = new Job(1, "java main.java");
-        Job job2 = new Job(2, "java deneme.java");
-        Job job3 = new Job(3, "java example.java");
-
         // İşleri öğrencilere ata
         System.out.println("Student 1");
-        student1.addAssignedJob(job1, windowsComputer1);
-        student1.addAssignedJob(job2, windowsComputer2);
+        student1.addAssignedJob(1, "python main.py", windowsComputer1);
+        student1.addAssignedJob(2, "python run.py", windowsComputer2);
+        student1.addAssignedJob(3, "python run_new.py", windowsComputer2);
         System.out.println("Student 2");
-        student2.addAssignedJob(job3, windowsComputer3);
+        student2.addAssignedJob(4, "python deneme.py", windowsComputer3);
 
         System.out.println("----------------------------------");
 
