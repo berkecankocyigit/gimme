@@ -1,5 +1,7 @@
 package Job;
 
+import Computers.Computer;
+import Users.User;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,11 +11,17 @@ public class Job {
     private int id;
     private String command;
     private JobState status;
+    private User userAssigned;
+    private Computer computerAssigned;
 
 
-    public Job(int id, String command) {
+    public Job(int id, String command, User userAssigned, Computer computerAssigned) {
         this.id = id;
         this.command = command;
         this.status = JobState.Padding;
+        this.userAssigned = userAssigned;
+        this.computerAssigned = computerAssigned;
+
     }
+
 }
