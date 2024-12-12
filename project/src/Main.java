@@ -1,13 +1,15 @@
 import Computers.Computer;
 import Computers.WindowsComputerFactory;
-import Job.Job;
+import Job.JobSchedular;
 import Users.Student;
 import Users.Technician;
+
 
 public class Main {
     public static void main(String[] args) {
 
         WindowsComputerFactory windowsComputerFactory = new WindowsComputerFactory();
+        JobSchedular jobSchedular = new JobSchedular();
 
         // Öğrencileri oluştur
         Student student1 = new Student(1, "student1", "student1@ozu.edu.tr", "s1_password");
@@ -63,6 +65,15 @@ public class Main {
         System.out.println("----------------------------------");
 
         // Öğrencilerin işlerini yazdır
+        student1.printAssignedJob();
+        student2.printAssignedJob();
+
+        jobSchedular.setComputer(windowsComputer2);
+        jobSchedular.runJob();
+        jobSchedular.setComputer(windowsComputer3);
+        jobSchedular.runJob();
+
+        System.out.println(" --- After Job Schedular ---");
         student1.printAssignedJob();
         student2.printAssignedJob();
 
