@@ -4,7 +4,7 @@ public enum ComputerState {
     AVAILABLE(true),
     BUSY(false);
 
-    private final boolean isAvailable;
+    private boolean isAvailable;
 
     ComputerState(boolean isAvailable) {
         this.isAvailable = isAvailable;
@@ -13,5 +13,7 @@ public enum ComputerState {
     public boolean isAvailable() {
         return isAvailable;
     }
+
+
 
 }

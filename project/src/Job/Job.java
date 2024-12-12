@@ -10,7 +10,7 @@ import lombok.Setter;
 public class Job {
     private int id;
     private String command;
-    private JobState status;
+    private JobState status = JobState.Padding;
     private User userAssigned;
     private Computer computerAssigned;
 
@@ -18,10 +18,21 @@ public class Job {
     public Job(int id, String command, User userAssigned, Computer computerAssigned) {
         this.id = id;
         this.command = command;
-        this.status = JobState.Padding;
         this.userAssigned = userAssigned;
         this.computerAssigned = computerAssigned;
 
+    }
+
+    public void shiftState(){
+        if (this.status == JobState.Running) {
+            this.status = JobState.Complete;
+        }
+        if (this.status == JobState.Padding) {
+            this.status = JobState.Running;
+        }
+    }
+    public void runJob(){
+        this.shiftState();
     }
 
     public void getSpecifications(){

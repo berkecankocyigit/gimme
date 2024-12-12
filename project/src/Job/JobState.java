@@ -5,7 +5,7 @@ public enum JobState {
     Running("running"),
     Complete("complete"),;
 
-    private final String state;
+    private String state;
 
     JobState(String state) {
         this.state = state;
@@ -14,4 +14,5 @@ public enum JobState {
     public String getState() {
         return state;
     }
+
 }

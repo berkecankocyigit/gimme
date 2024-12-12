@@ -68,4 +68,13 @@ public abstract class Computer {
         return state.isAvailable();
     }
 
+
+    public void shiftState(){
+        if(state.isAvailable()){
+            this.state = ComputerState.BUSY;
+        } else {
+            this.state = ComputerState.AVAILABLE;
+        }
+    }
+
 }
