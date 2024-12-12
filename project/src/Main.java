@@ -57,10 +57,19 @@ public class Main {
         // İşleri öğrencilere ata
         System.out.println("Student 1");
         student1.addAssignedJob(1, "python main.py", windowsComputer1);
-        student1.addAssignedJob(2, "python run.py", windowsComputer2);
-        student1.addAssignedJob(3, "python run_new.py", windowsComputer2);
+        student1.addAssignedJob(2, "python main.py", windowsComputer1);
+        student1.addAssignedJob(3, "python main.py", windowsComputer1);
+        student1.addAssignedJob(4, "python main.py", windowsComputer1);
+        student1.addAssignedJob(7, "python run.py", windowsComputer2);
+        student1.addAssignedJob(8, "python run.py", windowsComputer2);
+        student1.addAssignedJob(9, "python run.py", windowsComputer2);
+        student1.addAssignedJob(10, "python run_new.py", windowsComputer2);
         System.out.println("Student 2");
-        student2.addAssignedJob(4, "python deneme.py", windowsComputer3);
+        student2.addAssignedJob(11, "python deneme.py", windowsComputer3);
+        student2.addAssignedJob(12, "python deneme.py", windowsComputer3);
+        student2.addAssignedJob(13, "python deneme.py", windowsComputer3);
+        student2.addAssignedJob(14, "python deneme.py", windowsComputer3);
+
 
         System.out.println("----------------------------------");
 
@@ -68,14 +77,47 @@ public class Main {
         student1.printAssignedJob();
         student2.printAssignedJob();
 
-        jobSchedular.setComputer(windowsComputer2);
-        jobSchedular.runJob();
-        jobSchedular.setComputer(windowsComputer3);
-        jobSchedular.runJob();
+        Thread main1 = new Thread(() ->{
+            for (int i = 1; i <= 10; i++) {
+                jobSchedular.setComputer(windowsComputer1);
+                jobSchedular.runJob();
+                jobSchedular.setComputer(windowsComputer2);
+                jobSchedular.runJob();
+                jobSchedular.setComputer(windowsComputer3);
+                jobSchedular.runJob();
 
-        System.out.println(" --- After Job Schedular ---");
-        student1.printAssignedJob();
-        student2.printAssignedJob();
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }, "Main1");
+
+
+        Thread main2 = new Thread(() ->{
+            for (int i = 1; i <= 10; i++) {
+                System.out.println(" ### " + i + " ### ");
+                student1.printAssignedJob();
+                student2.printAssignedJob();
+
+                try {
+                    Thread.sleep(50);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }, "Main2");
+
+        main1.start();
+        main2.start();
+
+        try {
+            main1.join();
+            main2.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         System.out.println("----------------------------------");
         System.out.println("All Computers :");

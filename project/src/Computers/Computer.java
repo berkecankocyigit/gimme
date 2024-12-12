@@ -70,7 +70,7 @@ public abstract class Computer {
 
 
     public void shiftState(){
-        if(state.isAvailable()){
+        if(this.checkAvailability()){
             this.state = ComputerState.BUSY;
         } else {
             this.state = ComputerState.AVAILABLE;

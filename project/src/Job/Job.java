@@ -35,6 +35,11 @@ public class Job {
         this.shiftState();
     }
 
+    public void completeJob(){
+        this.shiftState();
+        this.computerAssigned.shiftState();
+    }
+
     public void getSpecifications(){
         System.out.println("Job - id : " + this.id + " command : " + this.command + " Status : " + this.status.getState());
     }
