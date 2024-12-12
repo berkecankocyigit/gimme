@@ -1,8 +1,10 @@
 package Computers;
 import Users.Student;
 import Job.Job;
+import Job.JobIterator;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 import lombok.Getter;
@@ -15,7 +17,7 @@ public abstract class Computer {
     protected String model;
     protected String ram;
     protected String storage;
-    protected Boolean state = true;
+    protected ComputerState state = ComputerState.AVAILABLE;
     private Set<Student> assignedStudents = new HashSet<>();
     private Set<Job> assignedJobs = new HashSet<>();
 
@@ -51,17 +53,19 @@ public abstract class Computer {
         this.assignedJobs.remove(assignedJob);
     }
 
-    public Set<Job> getAssignedJob() {
-        return (Set<Job>) this.assignedJobs;
+
+    public Iterator getAssignedJob() {
+        return new JobIterator(this.assignedJobs);
     }
+
     public void printAssignedJob() {
         for (Job job : assignedJobs) {
-            System.out.println("Job Id: " + job.getId() + " Command : " + job.getCommand());
+            job.getSpecifications();
         }
     }
 
-    public Boolean hasJob() {
-        return state;
+    public Boolean checkAvailability() {
+        return state.isAvailable();
     }
 
 }

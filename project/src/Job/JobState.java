@@ -1,7 +1,17 @@
 package Job;
 
 public enum JobState {
-    Padding,
-    Running,
-    Complete
+    Padding("padding"),
+    Running("running"),
+    Complete("complete"),;
+
+    private final String state;
+
+    JobState(String state) {
+        this.state = state;
+    }
+
+    public String getState() {
+        return state;
+    }
 }

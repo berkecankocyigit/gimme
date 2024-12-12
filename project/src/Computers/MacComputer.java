@@ -7,6 +7,6 @@ public class MacComputer extends Computer {
 
     @Override
     public void getSpecifications() {
-        System.out.println("Mac Computer Model: " + model + " | RAM: " + ram + " | Storage: " + storage);
+        System.out.println("Mac Computer Model: " + model + " | RAM: " + ram + " | Storage: " + storage + " | Availability: " + this.state);
     }
 }

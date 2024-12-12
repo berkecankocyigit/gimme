@@ -24,4 +24,8 @@ public class Job {
 
     }
 
+    public void getSpecifications(){
+        System.out.println("Job - id : " + this.id + " command : " + this.command + " Status : " + this.status.getState());
+    }
+
 }

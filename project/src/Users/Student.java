@@ -31,9 +31,7 @@ public class Student extends User {
         for (Computer computer : assignedComputers) {
             System.out.print("The jobs in ");
             computer.getSpecifications();
-            for (Job job : computer.getAssignedJob()){
-                System.out.println("Job Id: " + job.getId() + " Command : " + job.getCommand());
-            }
+            computer.printAssignedJob();
         }
     }
 
