@@ -1,6 +1,7 @@
 package Job;
 
 import Computers.Computer;
+import Listener.Listener;
 import Users.User;
 import lombok.Getter;
 import lombok.Setter;
@@ -31,8 +32,9 @@ public class Job {
             this.status = JobState.Running;
         }
     }
-    public void runJob(){
+    public void runJob(Listener listener){
         this.shiftState();
+        listener.runCode(this);
     }
 
     public void completeJob(){
