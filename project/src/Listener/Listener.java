@@ -1,14 +1,15 @@
 package Listener;
 
 import Computers.Computer;
-import Computers.Observer;
 import Job.Job;
+import Job.JobSchedular;
 
 public class Listener {
-    private Computer observer;
+    private JobSchedular observer = new JobSchedular();
+    private Computer computerProxy;
 
-    public Listener(Computer computer) {
-        this.observer = computer;
+    public Listener(Computer computerProxy) {
+        this.computerProxy = computerProxy;
     }
 
     public void runCode(Job job) {
@@ -24,6 +25,6 @@ public class Listener {
     }
 
     public void notifyObservers() {
-        this.observer.update();
+        this.observer.endRun(this.computerProxy);
     }
 }

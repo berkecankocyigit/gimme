@@ -19,9 +19,6 @@ public class Main {
         Computer windowsComputer1 = windowsComputerFactory.createComputer(1, "Dell XPS", "16GB", "512GB SSD");
         Computer windowsComputer2 = windowsComputerFactory.createComputer(2, "HP Pavilion", "8GB", "256GB SSD");
 
-        // JobSchedular'ı bilgisayarlara gözlemci olarak ekle
-        windowsComputer1.addObserver(jobSchedular);
-        windowsComputer2.addObserver(jobSchedular);
 
         // Bilgisayarları öğrencilere ata
         student1.addAssignedComputer(windowsComputer1);

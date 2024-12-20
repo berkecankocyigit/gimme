@@ -1,5 +1,7 @@
 package Computers;
 
+import Listener.Listener;
+
 public class MacComputer extends Computer {
     public MacComputer(int id, String model, String ram, String storage) {
         super(id, model, ram, storage);
@@ -7,6 +9,6 @@ public class MacComputer extends Computer {
 
     @Override
     public void getSpecifications() {
-        System.out.println("Mac Computer Model: " + model + " | RAM: " + ram + " | Storage: " + storage + " | Availability: " + this.state);
+        System.out.println("Mac Computer Model: " + model + " | RAM: " + ram + " | Storage: " + storage );
     }
 }

@@ -1,13 +1,9 @@
 package Computers;
 import Listener.Listener;
 import Users.Student;
-import Job.Job;
-import Job.JobIterator;
-import Job.Observer;
-import Job.JobState;
+import Job.*;
 
-import java.util.ArrayList;
-import java.util.List;
+
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -25,7 +21,7 @@ public abstract class Computer {
     protected ComputerState state = ComputerState.AVAILABLE;
     private Set<Student> assignedStudents = new HashSet<>();
     private Set<Job> assignedJobs = new HashSet<>();
-    private List<Observer> observers = new ArrayList<>();
+    private JobSchedular observer = new JobSchedular();
     private Listener listener = new Listener( this);
 
     public Computer(int id, String model, String ram, String storage) {
@@ -73,18 +69,9 @@ public abstract class Computer {
         }
     }
 
-    public void addObserver(Observer observer) {
-        observers.add(observer);
-    }
-
-    public void removeObserver(Observer observer) {
-        observers.remove(observer);
-    }
 
     public void notifyObservers() {
-        for (Observer observer : observers) {
-            observer.update(this);
-        }
+        observer.startRun(this);
     }
 
     public void shiftState() {
@@ -94,21 +81,5 @@ public abstract class Computer {
             state = ComputerState.AVAILABLE;
         }
         notifyObservers(); // Durum değişikliğinde observer'ları bilgilendir
-    }
-
-
-    public void update() {
-        finishJob();
-    }
-
-    public void finishJob() {
-        Iterator<Job> jobs = this.getAssignedJob();
-        while (jobs.hasNext()) {
-            Job job = jobs.next();
-            if (job.getStatus() == JobState.Running) {
-                job.completeJob();
-                break;
-            }
-        }
     }
 }
