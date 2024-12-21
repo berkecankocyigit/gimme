@@ -23,16 +23,6 @@ public class Job {
 
     }
 
-
-    public void shiftState(){
-        if (this.status == JobState.Running) {
-            this.status = JobState.Complete;
-        }
-        if (this.status == JobState.Padding) {
-            this.status = JobState.Running;
-        }
-    }
-
     public void getSpecifications(){
         System.out.println("Job - id : " + this.id + " command : " + this.command + " Status : " + this.status.getState());
     }

@@ -2,7 +2,7 @@ package SocketCommunicator;
 
 import Job.JobPrototype;
 import Computers.Computer;
-import Job.JobSchedular;
+import Job.JobState;
 
 import java.io.*;
 import java.net.*;
@@ -29,7 +29,7 @@ public class Server {
         }
     }
 
-    public void sendJob(JobPrototype job) {
+    public JobState sendJob(JobPrototype job) {
         try {
             if (checker) {
                 this.clientSocket = serverSocket.accept();
@@ -48,11 +48,18 @@ public class Server {
             Object response = this.input.readObject();
             if (response instanceof String) {
                 String result = (String) response;
-                System.out.println("Client response: " + result);
+                System.out.println("Client response: Job "+ job.getId() + " " + result);
+
+                if (result.equals("success")) {
+                    return JobState.Success;
+                } else {
+                    return JobState.Error;
+                }
             }
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
+        return null;
     }
 
 }

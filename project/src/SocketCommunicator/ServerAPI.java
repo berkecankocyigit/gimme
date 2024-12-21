@@ -3,6 +3,7 @@ package SocketCommunicator;
 import Computers.Computer;
 import Job.Job;
 import Job.JobPrototype;
+import Job.JobState;
 import lombok.Setter;
 
 public class ServerAPI {
@@ -20,9 +21,9 @@ public class ServerAPI {
 
         Thread listenerThread = new Thread(() -> {
             this.computer.shiftState();
-            job.shiftState();
-            server.sendJob(tmpJob);
-            job.shiftState();
+            job.setStatus(JobState.Running);
+            JobState runResult = server.sendJob(tmpJob);
+            job.setStatus(runResult);
             this.computer.shiftState();
         });
         listenerThread.start();

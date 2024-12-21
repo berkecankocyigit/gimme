@@ -3,7 +3,8 @@ package Job;
 public enum JobState {
     Padding("padding"),
     Running("running"),
-    Complete("complete"),;
+    Success("success"),
+    Error("error");
 
     private String state;
 
