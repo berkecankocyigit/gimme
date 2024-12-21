@@ -5,7 +5,7 @@ public class Technician extends ManagerAbstract {
 
     public Technician(int id, String name, String email, String password) {
         super(id, name, email, password);
-        this.status="Users.Technician";
+        this.status="Technician";
         System.out.println(name + " technician created");
     }
 
