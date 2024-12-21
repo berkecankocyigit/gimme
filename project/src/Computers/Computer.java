@@ -1,5 +1,5 @@
 package Computers;
-import Listener.Listener;
+import SocketCommunicator.ServerAPI;
 import Users.Student;
 import Job.*;
 
@@ -18,17 +18,21 @@ public abstract class Computer {
     protected String model;
     protected String ram;
     protected String storage;
+    protected int port;
+    protected ServerAPI serverAPI;
     protected ComputerState state = ComputerState.AVAILABLE;
     private Set<Student> assignedStudents = new HashSet<>();
     private Set<Job> assignedJobs = new HashSet<>();
     private JobSchedular observer = new JobSchedular();
-    private Listener listener = new Listener( this);
+    //private Listener listener = new Listener( this);
 
     public Computer(int id, String model, String ram, String storage) {
         this.id = id;
         this.model = model;
         this.ram = ram;
         this.storage = storage;
+        this.port = 5000 + this.id;
+        this.serverAPI = new ServerAPI(this);
     }
 
     public abstract void getSpecifications();
@@ -49,7 +53,6 @@ public abstract class Computer {
     }
 
     public void addAssignedJob(Job assignedJob) {
-
         this.assignedJobs.add(assignedJob);
         this.notifyObservers();
     }
@@ -79,7 +82,8 @@ public abstract class Computer {
             state = ComputerState.BUSY;
         } else {
             state = ComputerState.AVAILABLE;
+            notifyObservers();
         }
-        notifyObservers(); // Durum değişikliğinde observer'ları bilgilendir
+
     }
 }
