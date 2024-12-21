@@ -1,7 +1,6 @@
 package Job;
 
 import Computers.Computer;
-import Listener.Listener;
 import Users.User;
 import lombok.Getter;
 import lombok.Setter;
@@ -24,6 +23,7 @@ public class Job {
 
     }
 
+
     public void shiftState(){
         if (this.status == JobState.Running) {
             this.status = JobState.Complete;
@@ -31,15 +31,6 @@ public class Job {
         if (this.status == JobState.Padding) {
             this.status = JobState.Running;
         }
-    }
-    public void runJob(Listener listener){
-        this.shiftState();
-        listener.runCode(this);
-    }
-
-    public void completeJob(){
-        this.shiftState();
-        this.computerAssigned.shiftState();
     }
 
     public void getSpecifications(){
