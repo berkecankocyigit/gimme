@@ -36,7 +36,7 @@ public class Main {
         student2.printAssignedJob();
 
         try {
-            Thread.sleep(10000); // 10 saniye bekle
+            Thread.sleep(20000); // 10 saniye bekle
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

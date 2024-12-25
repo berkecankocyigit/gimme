@@ -42,10 +42,10 @@ public class Client {
 
 
                     if (n < 60){
-                        System.out.println("Job "+ job.getId()+" completed!");
+                        System.out.println("Job " + job.getId()+" completed!");
                         output.writeObject("success");
                     } else {
-                        System.out.println("Job "+ job.getId()+" get Error!");
+                        System.out.println("Job " + job.getId()+" get Error!");
                         output.writeObject("error");
                     }
                     output.flush();
