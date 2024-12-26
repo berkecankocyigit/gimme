@@ -24,7 +24,7 @@ public class JobSchedular implements JobSchedularObserver {
             while (jobs.hasNext()) {
                 Job job = jobs.next();
                 if (job.getStatus() == JobState.Padding) {
-                    this.server.communicate(job);
+                    this.server.sendJob(job);
                     break;
                 }
             }

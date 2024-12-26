@@ -1,16 +1,11 @@
 package src.SocketCommunicator;
 
-import src.Computers.Computer;
-import src.Job.Job;
 import src.Job.JobPrototypeRemote;
-import src.Job.JobPrototypeLocal;
+import src.Computers.Computer;
 import src.Job.JobState;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.net.ServerSocket;
-import java.net.Socket;
+import java.io.*;
+import java.net.*;
 
 public class Server {
     private ServerSocket serverSocket;
@@ -20,6 +15,8 @@ public class Server {
     private Computer computer;
     private int port;
 
+    private boolean checker = true;
+
     public Server(Computer computer) {
         this.computer = computer;
         this.port = this.computer.getPort();
@@ -27,73 +24,42 @@ public class Server {
         try {
             this.serverSocket = new ServerSocket(port);
             System.out.println("Server started on port " + port);
-        } catch (IOException e) {
+        }catch (IOException e){
             System.out.println(e);
         }
     }
 
-    // Geri dönüş değeri olmayan bir start metodu
-    public void start() {
-        new Thread(() -> {
-            while (true) {
-                try {
-                    // Client bağlantısı oluşturulmamışsa veya kesildiyse yenisini kabul et
-                    if (this.clientSocket == null || this.clientSocket.isClosed()) {
-                        this.clientSocket = serverSocket.accept();
-                        System.out.println("Client connected: " + clientSocket.getInetAddress());
-                        this.output = new ObjectOutputStream(this.clientSocket.getOutputStream());
-                        this.input = new ObjectInputStream(this.clientSocket.getInputStream());
-                    }
+    public JobState sendJob(JobPrototypeRemote job) {
+        try {
+            if (checker) {
+                this.clientSocket = serverSocket.accept();
+                System.out.println("Client connected: " + clientSocket.getInetAddress());
+                checker = false;
+            }
 
-                    // Müşteriden gelen cevabı oku
-                    Object response = this.input.readObject();
+            this.output = new ObjectOutputStream(this.clientSocket.getOutputStream());
+            this.input = new ObjectInputStream(this.clientSocket.getInputStream());
 
-                    if (response instanceof String) {
-                        String answer = (String) response;
-                        System.out.println("Client response: " + answer);
+            // Job objesini gönder
+            System.out.println("Sending job: " + job);
+            this.output.writeObject(job);
 
-                        // Gelen cevaba göre işlem yapabilirsiniz
-                        if (answer.equals("success")) {
-                            // Örnek işlem
-                            System.out.println("Job başarılı olarak işlenmiş.");
-                        } else {
-                            // Örnek işlem
-                            System.out.println("Job hata verdi.");
-                        }
+            // İstemciden yanıt bekle
+            Object response = this.input.readObject();
+            if (response instanceof String) {
+                String result = (String) response;
+                System.out.println("Client response: Job "+ job.getId() + " " + result);
 
-                    } else if (response instanceof JobPrototypeLocal) {
-                        System.out.println("deneeee");
-                        JobPrototypeLocal jobLocal = (JobPrototypeLocal) response;
-                        System.out.println("Client sent a local job: " + jobLocal.toString());
-                    }
-
-                } catch (IOException | ClassNotFoundException e) {
-                    System.out.println("Connection closed or error occurred.");
-                    e.printStackTrace();
-                    try {
-                        if (this.clientSocket != null) {
-                            this.clientSocket.close();
-                        }
-                    } catch (IOException ex) {
-                        ex.printStackTrace();
-                    }
+                if (result.equals("success")) {
+                    return JobState.Success;
+                } else {
+                    return JobState.Error;
                 }
             }
-        }).start();
-    }
-
-    public void sendMessage(JobPrototypeRemote job) {
-        try {
-            if (this.clientSocket != null && !this.clientSocket.isClosed()) {
-                this.output.writeObject(job);
-                this.output.flush();
-                System.out.println("Sent job: " + job.getId());
-            } else {
-                System.out.println("No active client connection. Unable to send job.");
-            }
-        } catch (IOException e) {
-            System.out.println("Failed to send job.");
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
+        return null;
     }
+
 }
