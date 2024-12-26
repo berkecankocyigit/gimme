@@ -10,7 +10,7 @@ import io.javalin.Javalin;
 public class Main {
     public static void main(String[] args) {
         InitiateTheProgram();
-
+        /*
         Javalin app = Javalin.create(config -> {
             // Set additional configurations if needed
             config.plugins.enableCors(cors -> cors.add(it -> it.anyHost())); // Enable CORS for all hosts
@@ -37,7 +37,7 @@ public class Main {
 
         // Example of a 404 handler
         app.error(404, ctx -> ctx.json("Resource not found"));
-
+*/
     }
 
     public static void InitiateTheProgram(){
@@ -66,8 +66,8 @@ public class Main {
             // "interrupt" edilirse bu istisna fırlar
             e.printStackTrace();
         }
-        student1.addAssignedJob(1, "pwd", "", windowsComputer1);
-        student1.addAssignedJob(2, "python3", "main.py", windowsComputer1);
+        student1.addAssignedJob(1,"/home/cagatay/Desktop/CS534/Proje1" ,"python3", "train.py", windowsComputer1);
+        student1.addAssignedJob(2,"/home/cagatay/Desktop/CS534/Proje1" ,"python3", "main.py", windowsComputer1);
 
 
     }

@@ -14,14 +14,16 @@ public class Job {
     private JobState status = JobState.Padding;
     private User userAssigned;
     private Computer computerAssigned;
+    private String path;
 
 
-    public Job(int id, String command, String args, User userAssigned, Computer computerAssigned) {
+    public Job(int id,String path ,String command, String args, User userAssigned, Computer computerAssigned) {
         this.id = id;
         this.command = command;
         this.args = args;
         this.userAssigned = userAssigned;
         this.computerAssigned = computerAssigned;
+        this.path = path;
 
     }
 
