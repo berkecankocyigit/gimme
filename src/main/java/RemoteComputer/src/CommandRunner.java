@@ -1,11 +1,14 @@
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.InputStreamReader;
 
 public class CommandRunner {
+    private String commandPath;
     private String command;
     private String[] args;
 
-    public CommandRunner(String command, String... args) {
+    public CommandRunner(String commandPath, String command, String... args) {
+        this.commandPath = commandPath;
         this.command = command;
         this.args = args;
     }
@@ -17,17 +20,19 @@ public class CommandRunner {
             cmdArray[0] = command;
             System.arraycopy(args, 0, cmdArray, 1, args.length);
 
-            // Validate if the command is available
-            if (!isCommandAvailable(command)) {
-                System.err.println("Error: Command not found - " + command);
-                return -1; // Custom error code for command not found
+            // Validate if the path is valid
+            File directory = new File(commandPath);
+            if (!directory.exists() || !directory.isDirectory()) {
+                System.err.println("Error: Path does not exist or is not a directory - " + commandPath);
+                return -1; // Custom error code for invalid directory
             }
 
-            // Start subprocess
+            // Start subprocess in the specified directory
             ProcessBuilder processBuilder = new ProcessBuilder(cmdArray);
+            processBuilder.directory(directory); // Change to the specified directory
             processBuilder.redirectErrorStream(true); // Combine stdout and stderr
 
-            System.out.println("Running command: " + command);
+            System.out.println("Running command: " + command + " in directory: " + commandPath);
             Process process = processBuilder.start();
 
             // Read and print output
@@ -51,22 +56,6 @@ public class CommandRunner {
         } catch (Exception e) {
             System.err.println("Exception while running the command: " + e.getMessage());
             return -1; // Custom error code for exceptions
-        }
-    }
-
-    private boolean isCommandAvailable(String command) {
-        String os = System.getProperty("os.name").toLowerCase();
-        String[] checkCommand;
-        if (os.contains("win")) {
-            checkCommand = new String[]{"cmd", "/c", "where", command};
-        } else {
-            checkCommand = new String[]{"which", command};
-        }
-        try {
-            Process checkProcess = new ProcessBuilder(checkCommand).start();
-            return checkProcess.waitFor() == 0;
-        } catch (Exception e) {
-            return false;
         }
     }
 }

@@ -32,7 +32,7 @@ public class Client {
                 Object receivedObject = input.readObject();
                 if (receivedObject instanceof JobPrototype) {
                     JobPrototype job = (JobPrototype) receivedObject;
-                    CommandRunner commandRunner = new CommandRunner(job.getCommand());
+                    CommandRunner commandRunner = new CommandRunner(".", job.getCommand());
                     int result = commandRunner.run();
 
                     if (result == 0){

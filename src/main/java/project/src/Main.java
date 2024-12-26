@@ -1,9 +1,13 @@
+import java.io.*;
+import java.lang.Thread;
+
 import Computers.Computer;
 import Computers.ComputerState;
 import Computers.WindowsComputerFactory;
 import Job.Job;
 import Job.JobSchedular;
 import Users.Student;
+
 
 public class Main {
     public static void main(String[] args) {
@@ -24,11 +28,19 @@ public class Main {
         student1.addAssignedComputer(windowsComputer1);
         student2.addAssignedComputer(windowsComputer2);
 
-        // İşleri öğrencilere ata
-        student1.addAssignedJob(1, "python main.py", windowsComputer1);
-        student1.addAssignedJob(2, "python analyze.py", windowsComputer1);
-        student2.addAssignedJob(3, "python run.py", windowsComputer2);
-        student2.addAssignedJob(4, "python clean.py", windowsComputer2);
+        try {
+
+            // İşleri öğrencilere ata
+            student1.addAssignedJob(1, "pwd", windowsComputer1);
+            Thread.sleep(5000);
+            student1.addAssignedJob(2, "python3 main.py", windowsComputer1);
+            Thread.sleep(5000);
+
+            student2.addAssignedJob(3, "python run.py", windowsComputer2);
+            Thread.sleep(5000);
+            student2.addAssignedJob(4, "python clean.py", windowsComputer2);
+            Thread.sleep(5000);
+        } catch (Exception e){}
 
         // İş durumlarını yazdır
         System.out.println("Başlangıç İş Durumları:");
