@@ -38,7 +38,7 @@ public class Client {
                 if (receivedObject instanceof JobPrototypeRemote) {
                     JobPrototypeRemote job = (JobPrototypeRemote) receivedObject;
                     System.out.println("asd");
-                    CommandRunner commandRunner = new CommandRunner(".", job.getCommand(), job.getArgs());//job.getCommand());
+                    CommandRunner commandRunner = new CommandRunner(job.getPath(), job.getCommand(), job.getArgs());//job.getCommand());
                     int result = commandRunner.run();
 
                     if (result == 0){
@@ -58,6 +58,7 @@ public class Client {
             } catch (IOException | ClassNotFoundException e) {
                 System.out.println("Connection closed or error occurred.");
                 System.out.println(e);
+                System.out.println(e.getMessage());
                 break; // Exit the loop if connection is lost or an error occurs
             }
         }
