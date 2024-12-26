@@ -19,12 +19,14 @@ public class JobSchedular implements JobSchedularObserver {
     }
 
     public void runJob(Computer computer) {
-        Iterator<Job> jobs = computer.getAssignedJob();
-        while (jobs.hasNext()) {
-            Job job = jobs.next();
-            if (job.getStatus() == JobState.Padding) {
-                this.server.communicate(job);
-                break;
+        synchronized (this) {
+            Iterator<Job> jobs = computer.getAssignedJob();
+            while (jobs.hasNext()) {
+                Job job = jobs.next();
+                if (job.getStatus() == JobState.Padding) {
+                    this.server.communicate(job);
+                    break;
+                }
             }
         }
     }

@@ -31,15 +31,15 @@ public class Main {
         try {
 
             // İşleri öğrencilere ata
-            student1.addAssignedJob(1, "pwd", windowsComputer1);
-            Thread.sleep(5000);
-            student1.addAssignedJob(2, "python3 main.py", windowsComputer1);
-            Thread.sleep(5000);
+            student1.addAssignedJob(1, "pwd", "", windowsComputer1);
+            Thread.sleep(1000);
+            student1.addAssignedJob(2, "python3", "main.py", windowsComputer1);
+            Thread.sleep(1000);
 
-            student2.addAssignedJob(3, "python run.py", windowsComputer2);
-            Thread.sleep(5000);
-            student2.addAssignedJob(4, "python clean.py", windowsComputer2);
-            Thread.sleep(5000);
+            student2.addAssignedJob(3, "python", "run.py", windowsComputer2);
+            Thread.sleep(1000);
+            student2.addAssignedJob(4, "python", "clean.py", windowsComputer2);
+            Thread.sleep(1000);
         } catch (Exception e){}
 
         // İş durumlarını yazdır

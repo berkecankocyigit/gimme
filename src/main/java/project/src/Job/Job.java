@@ -10,14 +10,16 @@ import lombok.Setter;
 public class Job {
     private int id;
     private String command;
+    private String args;
     private JobState status = JobState.Padding;
     private User userAssigned;
     private Computer computerAssigned;
 
 
-    public Job(int id, String command, User userAssigned, Computer computerAssigned) {
+    public Job(int id, String command, String args, User userAssigned, Computer computerAssigned) {
         this.id = id;
         this.command = command;
+        this.args = args;
         this.userAssigned = userAssigned;
         this.computerAssigned = computerAssigned;
 

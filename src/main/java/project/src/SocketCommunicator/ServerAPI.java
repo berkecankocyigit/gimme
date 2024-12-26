@@ -17,7 +17,7 @@ public class ServerAPI {
     }
 
     public void communicate(Job job) {
-        JobPrototype tmpJob = new JobPrototype(job.getId(), job.getCommand());
+        JobPrototype tmpJob = new JobPrototype(job.getId(), job.getCommand(), job.getArgs());
 
         Thread listenerThread = new Thread(() -> {
             this.computer.shiftState();
