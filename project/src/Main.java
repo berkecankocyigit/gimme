@@ -1,15 +1,46 @@
 import src.Computers.Computer;
 import src.Computers.WindowsComputerFactory;
-import src.Job.Job;
 import src.Job.JobSchedular;
 import src.Users.Admin;
 import src.Users.Student;
 
-
+import io.javalin.Javalin;
 
 
 public class Main {
     public static void main(String[] args) {
+        InitiateTheProgram();
+
+        Javalin app = Javalin.create(config -> {
+            // Set additional configurations if needed
+            config.plugins.enableCors(cors -> cors.add(it -> it.anyHost())); // Enable CORS for all hosts
+        });
+
+        // Start the server on port 7000
+        app.start(7000);
+
+        // Define API routes
+        app.get("/", ctx -> ctx.json("Welcome to Javalin API!"));
+        app.get("/hello", ctx -> ctx.json("Hello, World!"));
+
+        // Example of a route with a path parameter
+        app.get("/user/{id}", ctx -> {
+            String userId = ctx.pathParam("id");
+            ctx.json("User ID: " + userId);
+        });
+
+        // Example of a POST route
+        app.post("/create", ctx -> {
+            String body = ctx.body();
+            ctx.json("Received: " + body);
+        });
+
+        // Example of a 404 handler
+        app.error(404, ctx -> ctx.json("Resource not found"));
+
+    }
+
+    public static void InitiateTheProgram(){
         // Factory ve Scheduler oluştur
         WindowsComputerFactory windowsComputerFactory = new WindowsComputerFactory();
         JobSchedular jobSchedular = new JobSchedular();
@@ -37,8 +68,6 @@ public class Main {
         }
         student1.addAssignedJob(1, "pwd", "", windowsComputer1);
         student1.addAssignedJob(2, "python3", "main.py", windowsComputer1);
-
-
 
 
     }
