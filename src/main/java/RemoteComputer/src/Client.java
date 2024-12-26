@@ -1,3 +1,5 @@
+package main.java.RemoteComputer.src;
+
 import Job.JobPrototype;
 import java.util.Random;
 
@@ -20,7 +22,10 @@ public class Client {
             this.socket = new Socket(this.host, this.port);
             System.out.println("Connected to server at " + this.host + ":" + this.port);
 
-        } catch (IOException e) {}
+        } catch (IOException e) {
+            System.out.println("Bad Connection");
+            System.out.println(e.getMessage());
+        }
     }
 
     public void start() {
@@ -32,7 +37,7 @@ public class Client {
                 Object receivedObject = input.readObject();
                 if (receivedObject instanceof JobPrototype) {
                     JobPrototype job = (JobPrototype) receivedObject;
-                    CommandRunner commandRunner = new CommandRunner(".", job.getCommand());
+                    CommandRunner commandRunner = new CommandRunner(".", job.getCommand(), job.getArgs());//job.getCommand());
                     int result = commandRunner.run();
 
                     if (result == 0){
@@ -49,7 +54,7 @@ public class Client {
                     System.out.println("Unexpected object received: " + receivedObject);
                 }
 
-            } catch (IOException | ClassNotFoundException | InterruptedException e) {
+            } catch (IOException | ClassNotFoundException e) {
                 System.out.println("Connection closed or error occurred.");
                 break; // Exit the loop if connection is lost or an error occurs
             }
