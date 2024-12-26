@@ -1,4 +1,4 @@
-package main.java.RemoteComputer.src;
+import src.Client;
 
 public class windowsComputer1 {
     public static void main(String[] args) {

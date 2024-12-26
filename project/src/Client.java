@@ -1,6 +1,7 @@
-package main.java.RemoteComputer.src;
+package src;
 
-import Job.JobPrototype;
+import src.Job.JobPrototypeRemote;
+
 import java.util.Random;
 
 import java.io.*;
@@ -33,10 +34,10 @@ public class Client {
             try {
                 this.output = new ObjectOutputStream(this.socket.getOutputStream());
                 this.input = new ObjectInputStream(this.socket.getInputStream());
-
                 Object receivedObject = input.readObject();
-                if (receivedObject instanceof JobPrototype) {
-                    JobPrototype job = (JobPrototype) receivedObject;
+                if (receivedObject instanceof JobPrototypeRemote) {
+                    JobPrototypeRemote job = (JobPrototypeRemote) receivedObject;
+                    System.out.println("asd");
                     CommandRunner commandRunner = new CommandRunner(".", job.getCommand(), job.getArgs());//job.getCommand());
                     int result = commandRunner.run();
 
@@ -56,6 +57,7 @@ public class Client {
 
             } catch (IOException | ClassNotFoundException e) {
                 System.out.println("Connection closed or error occurred.");
+                System.out.println(e);
                 break; // Exit the loop if connection is lost or an error occurs
             }
         }

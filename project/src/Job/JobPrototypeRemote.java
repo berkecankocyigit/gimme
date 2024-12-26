@@ -1,17 +1,17 @@
-package Job;
+package src.Job;
 
 
 import java.io.Serial;
 import java.io.Serializable;
 
-public class JobPrototype implements Serializable {
+public class JobPrototypeRemote implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
     private int id;
     private String command;
     private  String args;
 
-    public JobPrototype(int id, String command, String args) {
+    public JobPrototypeRemote(int id, String command, String args) {
         this.id = id;
         this.command = command;
         this.args = args;
