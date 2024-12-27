@@ -31,6 +31,17 @@
             <version>5.6.1</version> <!-- Use the latest version -->
         </dependency>
 
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.10.1</version> <!-- Use the latest version -->
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.13.3</version>
+        </dependency>
+
         <!-- SLF4J for logging (Javalin requires it) -->
         <dependency>
             <groupId>org.slf4j</groupId>

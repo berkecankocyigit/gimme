@@ -51,9 +51,9 @@ public class Server {
                 System.out.println("Client response: Job "+ job.getId() + " " + result);
 
                 if (result.equals("success")) {
-                    return JobState.Success;
+                    return JobState.SUCCESS;
                 } else {
-                    return JobState.Error;
+                    return JobState.ERROR;
                 }
             }
         } catch (IOException | ClassNotFoundException e) {

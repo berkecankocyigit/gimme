@@ -85,4 +85,19 @@ public abstract class Computer {
         }
 
     }
+
+    @Override
+    public String toString() {
+        //assigned jobs and students
+        return "Computer{" +
+                "id=" + id +
+                ", model='" + model + '\'' +
+                ", ram='" + ram + '\'' +
+                ", storage='" + storage + '\'' +
+                ", port=" + port +
+                ", state=" + state +
+                ", assignedStudents=" + assignedStudents +
+                ", assignedJobs=" + assignedJobs +
+                '}';
+    }
 }

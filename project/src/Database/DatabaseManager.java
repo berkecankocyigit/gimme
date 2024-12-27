@@ -2,7 +2,6 @@ package src.Database;
 
 import src.Computers.Computer;
 import src.Computers.ComputerIterator;
-import src.Computers.WindowsComputerFactory;
 import src.Users.Student;
 import src.Users.User;
 
@@ -36,7 +35,7 @@ public class DatabaseManager {
         Statement statement;
         try {
             String query=String.format("INSERT INTO users(id, name, email, password, status) VALUES ('%s','%s','%s','%s','%s');",
-                    user.getId(),user.getName(),user.getEmail(),user.getPassword(),user.getStatus()
+                    user.getId(),user.getName(),user.getEmail(),user.getPassword(),user.getType()
             );
 
             statement=conn.createStatement();
@@ -130,7 +129,7 @@ public class DatabaseManager {
         Statement statement;
         ResultSet resultSet;
 
-        WindowsComputerFactory windowsComputerFactory = new WindowsComputerFactory();
+        src.Computers.LinuxComputerFactory linuxComputerFactory = new src.Computers.LinuxComputerFactory();
 
         try {
             String query = "SELECT id, model, ram, storage FROM computers";
@@ -145,7 +144,7 @@ public class DatabaseManager {
                 String storage = resultSet.getString("storage");
 
                 // Computer nesnesini oluştur ve listeye ekle
-                Computer computer = windowsComputerFactory.createComputer(id, model, ram, storage);
+                Computer computer = linuxComputerFactory.createComputer(id, model, ram, storage);
                 computers.add(computer);
             }
 

@@ -21,7 +21,7 @@ public class ServerAPI {
 
         Thread listenerThread = new Thread(() -> {
             this.computer.shiftState();
-            job.setStatus(JobState.Running);
+            job.setStatus(JobState.RUNNING);
             JobState runResult = server.sendJob(tmpJob);
             job.setStatus(runResult);
             this.computer.shiftState();

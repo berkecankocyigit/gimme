@@ -27,6 +27,6 @@ public abstract class User {
             computer.getSpecifications();
         }
     }
-    public abstract String getStatus();
+    public abstract String getType();
 
 }

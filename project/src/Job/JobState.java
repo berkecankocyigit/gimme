@@ -1,10 +1,10 @@
 package src.Job;
 
 public enum JobState {
-    Padding("padding"),
-    Running("running"),
-    Success("success"),
-    Error("error");
+    PENDING("padding"),
+    RUNNING("running"),
+    SUCCESS("success"),
+    ERROR("error");
 
     private String state;
 
