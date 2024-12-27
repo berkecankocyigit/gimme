@@ -1,5 +1,6 @@
 package src.Job;
 
+import lombok.Getter;
 import src.Computers.Computer;
 import src.Computers.ComputerState;
 import src.SocketCommunicator.ServerAPI;
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 @Setter
+@Getter
 public class JobSchedular implements JobSchedularObserver {
     private ServerAPI server;
     public ArrayList<Computer> activeComputers = new ArrayList<>();
