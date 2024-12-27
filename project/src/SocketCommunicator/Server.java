@@ -31,11 +31,10 @@ public class Server {
 
     public JobState sendJob(JobPrototypeRemote job) {
         try {
-            if (checker) {
+
                 this.clientSocket = serverSocket.accept();
                 System.out.println("Client connected: " + clientSocket.getInetAddress());
-                checker = false;
-            }
+
 
             this.output = new ObjectOutputStream(this.clientSocket.getOutputStream());
             this.input = new ObjectInputStream(this.clientSocket.getInputStream());

@@ -145,6 +145,7 @@ public class Main {
 
         // Example of a 404 handler
         app.error(404, ctx -> ctx.json("Resource not found"));
+
     }
 
     public static void InitiateTheProgram(){
@@ -173,6 +174,9 @@ public class Main {
             // Thread uyku sırasında bir başka thread tarafından
             // "interrupt" edilirse bu istisna fırlar
             e.printStackTrace();
+        }
+        student1.addAssignedJob(1,"/home/cagatay/Desktop/CS534/Proje1" ,"python3", "train.py", windowsComputer1);
+        student1.addAssignedJob(2,"/home/cagatay/Desktop/CS534/Proje1" ,"python3", "main.py", windowsComputer1);
         }*/
         users.add(student1);
         users.add(student2);

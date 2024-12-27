@@ -12,11 +12,13 @@ public class JobPrototypeRemote implements Serializable {
     private int id;
     private String command;
     private String args;
+    private String path;
 
-    public JobPrototypeRemote(int id, String command, String args) {
+    public JobPrototypeRemote(int id,String path, String command, String args) {
         this.id = id;
         this.command = command;
         this.args = args;
+        this.path = path;
     }
 
     @Override

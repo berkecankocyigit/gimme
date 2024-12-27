@@ -23,6 +23,7 @@ public class Job {
         this.args = args;
         this.userAssigned = userAssigned;
         this.computerAssigned = computerAssigned;
+        this.path = path;
 
     }
 

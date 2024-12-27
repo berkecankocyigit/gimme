@@ -17,7 +17,7 @@ public class ServerAPI {
     }
 
     public void sendJob(Job job) {
-        JobPrototypeRemote tmpJob = new JobPrototypeRemote(job.getId(), job.getCommand(), job.getArgs());
+        JobPrototypeRemote tmpJob = new JobPrototypeRemote(job.getId(),job.getPath() ,job.getCommand(), job.getArgs());
 
         Thread listenerThread = new Thread(() -> {
             this.computer.shiftState();
